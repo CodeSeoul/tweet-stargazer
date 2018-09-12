@@ -1,0 +1,4 @@
+environment:
+  workflow_name: "tweet-stargazer-app"
+  gateway: "gateway:8080"
+  enable_tracing: false

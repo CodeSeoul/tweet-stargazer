@@ -21,10 +21,8 @@ def handle(st):
     # Take the encoded image and turn into binary bytes
     image_data = base64.standard_b64decode(req["image"])
 
-    polaroid_r = requests.post("http://gateway:8080/function/polaroid", data=image_data)
-
     f = open("/tmp/"+file_name, 'wb')
-    f.write(polaroid_r.content)
+    f.write(image_data)
     f.close()
 
     api.update_with_media("/tmp/"+file_name, req["login"] + " is a star-gazer for " + req["repository"])
