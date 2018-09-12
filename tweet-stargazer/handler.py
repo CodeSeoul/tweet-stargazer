@@ -12,13 +12,14 @@ def handle(st):
 
     api = tweepy.API(auth)
 
-    image = req["image"]
-    file_name = req["filename"]
-    login = req["login"]
-    print(login, file_name)
+    # Figure out the correct extension for the avatar.
+    ext = ".jpg"
+    if req["contentType"] == "image/png":
+        ext = ".png"
+    file_name = req["login"] + ext
 
     # Take the encoded image and turn into binary bytes
-    image_data = base64.standard_b64decode(image)
+    image_data = base64.standard_b64decode(req["image"])
 
     polaroid_r = requests.post("http://gateway:8080/function/polaroid", data=image_data)
 
@@ -26,7 +27,7 @@ def handle(st):
     f.write(polaroid_r.content)
     f.close()
 
-    api.update_with_media("/tmp/"+file_name, login + " is a star-gazer for " + os.environ["project"])
+    api.update_with_media("/tmp/"+file_name, req["login"] + " is a star-gazer for " + req["repository"])
 
     # Log the results
     print("Tweet sent")

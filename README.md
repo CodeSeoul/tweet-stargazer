@@ -19,4 +19,4 @@ This is a set of openfaas Serverless functions that handles github stared event 
 Your Twitter API tokens need to go into a `twitter_secrets.yml` file.
 
 #### Example tweet:
-(s8sg is a star-gazer for faaschain)[https://twitter.com/s8sgbots/status/1039736003647492099]
+(s8sg is a star-gazer for faaschain)[https://twitter.com/s8sgbots/status/1039746625701392384]
