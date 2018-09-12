@@ -1,0 +1,45 @@
+provider:
+  name: faas
+  gateway: http://localhost:8080
+  network: func_functions
+
+functions:
+
+  # handle a github star event
+  github-star:
+    lang: python
+    handler: ./github-star
+    image: s8sg/github-star
+    environment:
+      write_debug: true
+      combine_output: false
+
+  # Get an avatar from a given url
+  get-avatar:
+    lang: Dockerfile
+    handler: ./get-avater
+    image: s8sg/get-avatar
+    environment:
+      write_debug: true
+      combine_output: false
+
+  # Polaroid an image  
+  polaroid:
+    lang: Dockerfile
+    handler: ./polaroid
+    image: s8sg/faas-polaroid
+    environment:
+      write_debug: true
+      combine_output: false
+
+  # tweet about the stargazer
+  tweet-stargazer:
+    lang: python
+    handler: ./tweet-stargazer
+    image: s8sg/tweet-stargazer
+    environment:
+      project: "faaschain"
+      write_debug: true
+      combine_output: false
+    environment_file:
+      - twitter_secrets.yml
